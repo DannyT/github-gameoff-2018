@@ -8,6 +8,7 @@ class GameScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    this.add.image(100, 100, 'atlas', 'chicken.png');
     this.add.text(100, 100, 'Hello World', {
       fontFamily: 'Arial',
       fontSize: 64,
