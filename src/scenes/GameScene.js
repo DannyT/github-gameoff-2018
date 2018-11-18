@@ -36,13 +36,18 @@ class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.baddies, this.platforms);
+    this.physics.add.overlap(this.baddies, this.player, this.gameOver, null, this);
 
-    this.time.addEvent({
-      delay: 900,
-      loop: true,
+    this.timerConfig = {
+      delay: Phaser.Math.Between(800, 3000),
       callback: this.createBaddie,
-      callbackScope: this
-    });
+      callbackScope: this,
+      loop:true
+    }
+    this.spawnTimer = this.time.addEvent(this.timerConfig);
+
+    // score
+    this.scoreText = this.add.text(32, 32);
   }
 
   createBaddie() {
@@ -52,13 +57,25 @@ class GameScene extends Phaser.Scene {
     }
     baddie.setActive(true);
     baddie.setVisible(true);
+    baddie.setScale(1, Phaser.Math.Between(10, 11)/10);
     baddie.setVelocity(-500, 0);
+    this.timerConfig.delay = Phaser.Math.Between(1200, 3000);
+    this.spawnTimer.reset(this.timerConfig);
   }
 
   jump() {
     if (this.player.body.touching.down) {
       this.player.body.setVelocityY(-1000);
     }
+  }
+
+  gameOver(){
+    this.spawnTimer.remove();
+    this.scene.pause();
+  }
+
+  update(time, delta){
+    this.scoreText.setText((time/1000).toFixed(2));
   }
 }
 
