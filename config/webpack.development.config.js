@@ -4,6 +4,7 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const { phaser, phaserModule, nodeModules, dist, dev, src } = require('./paths');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // https://webpack.js.org/plugins/define-plugin/
 const definePlugin = new webpack.DefinePlugin({
@@ -17,6 +18,11 @@ const definePlugin = new webpack.DefinePlugin({
 const htmlPlugin = new HtmlWebpackPlugin({
   template: './src/index.html'
 });
+
+// https://github.com/webpack-contrib/copy-webpack-plugin
+const copyWebpackPlugin = new CopyWebpackPlugin([
+  {from:'src/assets',to:'assets'}
+]);
 
 // https://www.npmjs.com/package/browser-sync-webpack-plugin
 const browserSyncPlugin = new BrowserSyncPlugin(
@@ -48,7 +54,7 @@ module.exports = (env, options) => {
         chunks: 'all' // separates vendor bundles from main
       }
     },
-    plugins: [definePlugin, htmlPlugin, analyzerPlugin, browserSyncPlugin],
+    plugins: [definePlugin, htmlPlugin, analyzerPlugin, browserSyncPlugin, copyWebpackPlugin],
     module: {
       rules: [
         { // transpile js using babel

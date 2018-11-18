@@ -132,7 +132,7 @@
             <key>json</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>atlas.json</filename>
+                <filename>../../assets/atlas/dinohen-atlas.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -182,6 +182,7 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">../images/chicken.png</key>
+            <key type="filename">../images/ground.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -197,14 +198,16 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../images/chicken.png</filename>
+            <filename>../images</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
         <key>replaceList</key>
         <array/>
         <key>ignoredWarnings</key>
-        <array/>
+        <array>
+            <string>phaser3-exporter-beta</string>
+        </array>
         <key>commonDivisorX</key>
         <uint>1</uint>
         <key>commonDivisorY</key>

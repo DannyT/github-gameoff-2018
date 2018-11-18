@@ -26,10 +26,14 @@ class TitleScene extends Phaser.Scene {
 
     emitter.startFollow(logo);
 
-    this.input.once('pointerdown', () => {
-      this.scene.add('GameScene', GameScene);
-      this.scene.start('GameScene');
-    });
+    this.input.once('pointerdown', this.startGame, this);
+
+    this.startGame();
+  }
+
+  startGame(){
+    this.scene.add('GameScene', GameScene);
+    this.scene.start('GameScene');
   }
 
   update(time, delta) {}
